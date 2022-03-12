@@ -59,39 +59,3 @@ beams.forEach((beam) => beam.setContext(context).draw());
 const svg = div.innerHTML.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ');
 
 console.log(svg);
-
-function x() {
-  const div = document.getElementById('vf') as HTMLDivElement;
-  const renderer = new Renderer(div, VF.Renderer.Backends.SVG);
-
-  // Configure the rendering context.
-  renderer.resize(500, 500);
-  const context = renderer.getContext();
-  context.setFont('Arial', 10).setBackgroundFillStyle('#eed');
-
-  // Create a stave of width 400 at position 10, 40 on the canvas.
-  const stave = new Stave(10, 40, 400);
-
-  // Add a clef and time signature.
-  stave.addClef('treble').addTimeSignature('4/4');
-  stave.setContext(context);
-  stave.draw();
-  // Connect it to the rendering context and draw!
-  const notes1 = [
-    new StaveNote({ keys: ['c/5'], duration: '16' }),
-    new StaveNote({ keys: ['c/5'], duration: '16' }),
-    new StaveNote({ keys: ['b/4'], duration: '8' }),
-  ];
-  const notes2 = [
-    new StaveNote({ keys: ['c/5'], duration: '8' }),
-    new StaveNote({ keys: ['b/4', 'b/4', 'c/5'], duration: '8' }),
-  ];
-
-  var beams = [new Beam(notes1), new Beam(notes2)];
-
-  let allnotes = notes1.concat(notes2);
-  Formatter.FormatAndDraw(context, stave, allnotes);
-  beams.forEach((beam) => beam.setContext(context).draw());
-}
-
-x();
