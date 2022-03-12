@@ -130,5 +130,9 @@
     "piano",
     "guitar",
     "tablature"
-  ]
+  ],
+  "dependencies": {
+    "esbuild": "^0.14.25",
+    "esbuild-register": "^3.3.2"
+  }
 }

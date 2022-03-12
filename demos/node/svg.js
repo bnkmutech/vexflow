@@ -4,6 +4,7 @@ const Vex = require('vexflow');
 const { JSDOM } = require('jsdom');
 
 const VF = Vex.Flow;
+const { Renderer, Stave, StaveNote, Formatter } = Vex.Flow;
 
 const dom = new JSDOM('<!DOCTYPE html><html><body><div id="vf"></div><body></html>');
 
@@ -24,8 +25,18 @@ const stave = new VF.Stave(10, 40, 400);
 // Add a clef and time signature.
 stave.addClef('treble').addTimeSignature('4/4');
 
+
 // Connect it to the rendering context and draw!
 stave.setContext(context).draw();
+const notes = [
+  //
+  new StaveNote({ keys: ['c/5'], duration: '4' }),
+  new StaveNote({ keys: ['b/4'], duration: '4' }),
+  new StaveNote({ keys: ['a/4'], duration: '4' }),
+  new StaveNote({ keys: ['g/4'], duration: '4' }),
+];
+
+Formatter.FormatAndDraw(context, stave, notes);
 
 const svg = div.innerHTML.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ');
 
